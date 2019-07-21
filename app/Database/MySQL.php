@@ -19,7 +19,6 @@ class MySQL implements Database
     public function connect()
     {
         try {
-
             $this->connection = new PDO('mysql:host=' . $this->host . ';dbname=' . $this->name, $this->username, $this->password);
 
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
