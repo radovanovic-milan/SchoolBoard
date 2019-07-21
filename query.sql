@@ -6,6 +6,6 @@ CREATE TABLE `qtest`.`grades` ( `id` INT NOT NULL AUTO_INCREMENT , `student_id` 
 
 ALTER TABLE `grades` ADD CONSTRAINT `student_id` FOREIGN KEY (`student_id`) REFERENCES `students`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
-INSERT INTO `students` (`id`, `school`, `name`, `created_at`) VALUES (NULL, 'CSM', 'First Student', ''), (NULL, 'CSMB', 'Second Student', '')
+INSERT INTO `students` (`id`, `school`, `name`, `created_at`) VALUES (NULL, 'CSM', 'First Student', '2019-07-21 12:00:00'), (NULL, 'CSMB', 'Second Student', '2019-07-21 12:00:00')
 
-INSERT INTO `grades` (`id`, `student_id`, `grade`, `created_at`) VALUES (NULL, '1', '10', ''), (NULL, '1', '9', ''), (NULL, '1', '8', ''), (NULL, '1', '7', ''), (NULL, '2', '8', ''), (NULL, '2', '7', ''), (NULL, '2', '10', ''), (NULL, '2', '6', '')
+INSERT INTO `grades` (`id`, `student_id`, `grade`, `created_at`) VALUES (NULL, '1', '10', '2019-07-21 12:00:00'), (NULL, '1', '9', '2019-07-21 12:00:00'), (NULL, '1', '8', '2019-07-21 12:00:00'), (NULL, '1', '7', '2019-07-21 12:00:00'), (NULL, '2', '8', '2019-07-21 12:00:00'), (NULL, '2', '7', '2019-07-21 12:00:00'), (NULL, '2', '10', '2019-07-21 12:00:00'), (NULL, '2', '6', '2019-07-21 12:00:00')

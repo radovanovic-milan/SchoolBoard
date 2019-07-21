@@ -11,7 +11,7 @@ class MySQL implements Database
 {
     private $host = 'localhost';
     private $name = 'qtest';
-    private $username = '';
+    private $username = 'root';
     private $password = '';
 
     public $connection = null;

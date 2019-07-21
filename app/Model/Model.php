@@ -18,8 +18,8 @@ class Model
 
     public function all()
     {
-        $sql = "SELECT FROM " . $this->table;
-        $smtp = $this->db->prepare($sql);
+        $sql = "SELECT * FROM " . $this->table;
+        $smtp = $this->db->connect()->prepare($sql);
         $smtp->execute();
 
         return $smtp->fetchAll();

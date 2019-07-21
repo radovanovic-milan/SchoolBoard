@@ -5,4 +5,4 @@ use App\Student;
 
 $student = new Student();
 
-print_r($student->find($_GET['student_id']));
+echo $student->find($_GET['student_id']);

@@ -12,31 +12,31 @@ class Student extends Model
 
     public $board;
 
-    /**
-     * User constructor.
-     * @param PDO $db
-     */
-    public function __construct()
-    {
-    }
-
     public function find($id)
     {
-        $sql = 'SELECT * FROM ' . $this->table . ' WHERE id=:student_id LEFT JOIN grades ON student.id = grades.student_id';
+        $sql = 'SELECT * FROM ' . $this->table . ' LEFT JOIN grades ON students.id = grades.student_id WHERE students.id=:student_id';
 
         // prepare query statement
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(':id', $id);
+        $stmt = $this->db->connect()->prepare($sql);
+        $stmt->bindParam(':student_id', $id);
 
         // execute query
         $stmt->execute();
 
-        if ($stmt->school === 'CSM'){
-            $board = new CSM($stmt->id, $stmt->grades, $stmt->name);
+        $result = $stmt->fetchAll();
+
+        $grades = [];
+        foreach ($result as $grade) {
+            $grades[] = $grade['grade'];
+        }
+
+        if ($result[0]['school'] === 'CSM'){
+            $board = new CSM($result[0]['id'], $grades, $result[0]['name']);
         }
         else {
-            $board = new CSMB($stmt->id, $stmt->grades, $stmt->name);
+            $board = new CSMB($result[0]['id'], $grades, $result[0]['name']);
         }
+
         return $board->export();
 
 //        $result = new \stdClass();

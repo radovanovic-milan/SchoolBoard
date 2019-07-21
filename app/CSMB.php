@@ -23,8 +23,48 @@ class CSMB extends Board
 
         $export = [$this->student_id, $this->name, $this->grades, $average, $this->checkPass()];
 
-        $xml = new SimpleXMLElement('<root/>');
-        array_walk_recursive($export, array ($xml, 'addChild'));
-        return $xml->asXML();
+
+
+
+
+
+//        $xml = new \SimpleXMLElement('<root/>');
+//        array_walk_recursive($export, array ($xml, 'addChild'));
+//        return $xml->asXML();
+
+        // initializing or creating array
+        //$data = array('total_stud' => 500);
+
+// creating object of SimpleXMLElement
+        $xml_data = new \SimpleXMLElement('<?xml version="1.0"?><data></data>');
+
+// function call to convert array to xml
+        $this->array_to_xml($export,$xml_data);
+
+//saving generated xml file;
+        return $xml_data->asXML();
+
+
+
+
+
+
+
+
+
+    }
+
+    private function array_to_xml( $data, &$xml_data ) {
+        foreach( $data as $key => $value ) {
+            if( is_numeric($key) ){
+                $key = 'item'.$key; //dealing with <0/>..<n/> issues
+            }
+            if( is_array($value) ) {
+                $subnode = $xml_data->addChild($key);
+                $this->array_to_xml($value, $subnode);
+            } else {
+                $xml_data->addChild("$key",htmlspecialchars("$value"));
+            }
+        }
     }
 }
